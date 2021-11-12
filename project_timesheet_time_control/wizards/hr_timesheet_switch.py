@@ -45,14 +45,11 @@ class HrTimesheetSwitch(models.TransientModel):
                 ("unit_amount", "=", 0),
             ]
         )
+        # print("--------------------")
+        # print(running)
         if len(running) > 1:
-            raise UserError(
-                _(
-                    "%d running timers found. Cannot know which one to stop. "
-                    "Please stop them manually."
-                )
-                % len(running)
-            )
+            running=running[0]
+             
         return running
 
     @api.depends("date_time", "running_timer_id")
